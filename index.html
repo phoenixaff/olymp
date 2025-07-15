@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Señales de Trading</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f2f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: #1e3a8a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .panel {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        select, button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background: #1e3a8a;
+            color: white;
+            cursor: pointer;
+            border: none;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #1d4ed8;
+        }
+        .signal {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+        .buy {
+            background: #bbf7d0;
+            color: #166534;
+        }
+        .sell {
+            background: #fecaca;
+            color: #991b1b;
+        }
+        #chart-container {
+            margin-top: 20px;
+            height: 400px;
+        }
+        #history {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Generador de Señales de Trading</h1>
+            <p>Simulador de señales para Forex, Cripto y Binarias</p>
+        </header>
+
+        <div class="panel">
+            <h2>⚙️ Configuración</h2>
+            <div class="controls">
+                <select id="asset">
+                    <option value="BTC">Bitcoin (BTC/USD)</option>
+                    <option value="EURUSD">EUR/USD</option>
+                    <option value="AAPL">Apple (AAPL)</option>
+                    <option value="GOLD">Oro (XAU/USD)</option>
+                </select>
+                <select id="timeframe">
+                    <option value="1m">1 Minuto</option>
+                    <option value="5m">5 Minutos</option>
+                    <option value="15m">15 Minutos</option>
+                    <option value="1h">1 Hora</option>
+                    <option value="4h">4 Horas</option>
+                </select>
+                <button id="generate">Generar Señal</button>
+                <button id="clear">Limpiar Historial</button>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>📈 Gráfico de Precios</h2>
+            <div id="chart-container">
+                <canvas id="priceChart"></canvas>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>📢 Última Señal</h2>
+            <div id="currentSignal" class="signal">Esperando señal...</div>
+            <h2>📜 Historial de Señales</h2>
+            <div id="history"></div>
+        </div>
+    </div>
+
+    <script>
+        // Datos iniciales para el gráfico
+        const initialData = {
+            labels: Array.from({ length: 20 }, (_, i) => i + 1),
+            datasets: [{
+                label: 'Precio',
+                data: Array.from({ length: 20 }, () => Math.random() * 100 + 100),
+                borderColor: '#1e3a8a',
+                tension: 0.1,
+                fill: false
+            }]
+        };
+
+        // Configuración del gráfico
+        const ctx = document.getElementById('priceChart').getContext('2d');
+        const priceChart = new Chart(ctx, {
+            type: 'line',
+            data: initialData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true },
+                    tooltip: { mode: 'index' }
+                },
+                scales: {
+                    y: { beginAtZero: false }
+                }
+            }
+        });
+
+        // Generar señal aleatoria
+        function generateSignal() {
+            const assets = {
+                "BTC": "Bitcoin",
+                "EURUSD": "EUR/USD",
+                "AAPL": "Apple",
+                "GOLD": "Oro"
+            };
+            const asset = document.getElementById('asset').value;
+            const timeframe = document.getElementById('timeframe').value;
+            
+            // Señal aleatoria (COMPRA/VENTA)
+            const signalType = Math.random() > 0.5 ? "COMPRA" : "VENTA";
+            const rsi = (Math.random() * 30 + 30).toFixed(2);
+            const macd = (Math.random() * 2 - 1).toFixed(2);
+            const price = (Math.random() * 10000 + 10000).toFixed(2);
+            
+            // Actualizar última señal
+            const currentSignal = document.getElementById('currentSignal');
+            currentSignal.textContent = `${signalType} ${assets[asset]} (${timeframe}) | Precio: ${price}`;
+            currentSignal.className = `signal ${signalType === 'COMPRA' ? 'buy' : 'sell'}`;
+            
+            // Añadir al historial
+            const history = document.getElementById('history');
+            const signalElement = document.createElement('div');
+            signalElement.className = `signal ${signalType === 'COMPRA' ? 'buy' : 'sell'}`;
+            signalElement.textContent = `[${new Date().toLocaleTimeString()}] ${signalType} ${assets[asset]} (${timeframe}) | RSI: ${rsi} | MACD: ${macd} | Precio: ${price}`;
+            history.prepend(signalElement);
+            
+            // Actualizar gráfico con nueva data
+            updateChart();
+        }
+
+        // Actualizar el gráfico con datos aleatorios
+        function updateChart() {
+            const newData = Array.from({ length: 20 }, () => Math.random() * 100 + 100);
+            priceChart.data.datasets[0].data = newData;
+            priceChart.update();
+        }
+
+        // Event Listeners
+        document.getElementById('generate').addEventListener('click', generateSignal);
+        document.getElementById('clear').addEventListener('click', () => {
+            document.getElementById('history').innerHTML = '';
+        });
+    </script>
+</body>
+</html>
