@@ -1,201 +1,1245 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de Señales de Trading</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Premium Football Predictions - English Matches</title>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'YOUR_PIXEL_ID');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@700&display=swap');
+        
+        :root {
+            --primary: #1a3e8c;
+            --secondary: #d10a11;
+            --accent: #f8c300;
+            --dark: #0a0a0a;
+            --light: #f8f8f8;
+        }
+        
+        * {
             margin: 0;
             padding: 0;
-            background: #f0f2f5;
-            color: #333;
+            box-sizing: border-box;
         }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            background-image: url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
+        
         header {
-            background: #1e3a8a;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            background: rgba(10, 10, 10, 0.9);
+            padding: 20px 0;
+            border-bottom: 3px solid var(--accent);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
         }
-        .panel {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-        .controls {
+        
+        .header-content {
             display: flex;
-            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 28px;
+            color: var(--light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        .hero-content {
+            text-align: center;
+            width: 100%;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 72px;
             margin-bottom: 20px;
-            flex-wrap: wrap;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--light);
+            text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
         }
-        select, button {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        
+        .hero h1 span {
+            color: var(--accent);
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             font-size: 16px;
-        }
-        button {
-            background: #1e3a8a;
-            color: white;
-            cursor: pointer;
+            transition: all 0.3s ease;
             border: none;
-            transition: background 0.3s;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
-        button:hover {
-            background: #1d4ed8;
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            background: #ffd700;
         }
-        .signal {
-            padding: 10px;
-            border-radius: 4px;
-            margin: 5px 0;
-            font-weight: bold;
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid var(--accent);
+            margin-left: 20px;
         }
-        .buy {
-            background: #bbf7d0;
-            color: #166534;
+        
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: var(--dark);
         }
-        .sell {
-            background: #fecaca;
-            color: #991b1b;
-        }
-        #chart-container {
+        
+        .btn-telegram {
+            background: #0088cc;
+            color: white;
             margin-top: 20px;
-            height: 400px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
-        #history {
-            max-height: 300px;
-            overflow-y: auto;
+        
+        .btn-telegram:hover {
+            background: #0077b5;
+            color: white;
+        }
+        
+        .btn-telegram i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .telegram-link {
+            color: #0088cc;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .telegram-link:hover {
+            text-decoration: underline;
+        }
+        
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 42px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--light);
+            display: inline-block;
+            position: relative;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background: var(--accent);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 30px;
+            background: rgba(26, 62, 140, 0.3);
+            border-radius: 10px;
+            width: 22%;
+            min-width: 200px;
+            margin: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(248, 195, 0, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .stat-item:nth-child(2) {
+            animation-delay: 1s;
+        }
+        
+        .stat-item:nth-child(3) {
+            animation-delay: 2s;
+        }
+        
+        .stat-item:nth-child(4) {
+            animation-delay: 3s;
+        }
+        
+        .stat-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background: rgba(26, 62, 140, 0.5);
+        }
+        
+        .stat-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 50px;
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .stat-text {
+            font-size: 18px;
+            color: var(--light);
+        }
+        
+        .pricing {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .pricing-card {
+            background: rgba(10, 10, 10, 0.8);
+            border-radius: 10px;
+            width: 350px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(248, 195, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--accent);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent);
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid var(--accent);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.popular:after {
+            content: 'POPULAR';
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 5px 30px;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            transform: rotate(45deg);
+        }
+        
+        .pricing-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--light);
+            text-transform: uppercase;
+        }
+        
+        .price {
+            font-size: 50px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 25px;
+        }
+        
+        .price span {
+            font-size: 16px;
+            font-weight: 400;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light);
+        }
+        
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .testimonials {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: rgba(10, 10, 10, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            width: 350px;
+            position: relative;
+            border: 1px solid rgba(248, 195, 0, 0.3);
+        }
+        
+        .testimonial-card:before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 80px;
+            color: rgba(248, 195, 0, 0.2);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+            border: 2px solid var(--accent);
+        }
+        
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            font-family: 'Oswald', sans-serif;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .faq {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            border: 1px solid rgba(248, 195, 0, 0.3);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            background: rgba(26, 62, 140, 0.3);
+            padding: 20px;
+            cursor: pointer;
+            font-weight: 700;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: rgba(26, 62, 140, 0.5);
+        }
+        
+        .faq-question:after {
+            content: '+';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: var(--accent);
+        }
+        
+        .faq-question.active:after {
+            content: '-';
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: rgba(10, 10, 10, 0.6);
+        }
+        
+        .faq-answer.show {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        footer {
+            background: rgba(10, 10, 10, 0.9);
+            padding: 50px 0 20px;
+            text-align: center;
+            border-top: 3px solid var(--accent);
+        }
+        
+        .footer-logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 28px;
+            color: var(--light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo span {
+            color: var(--accent);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links a {
+            color: var(--light);
+            margin: 0 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 20px;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Payment Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background: rgba(10, 10, 10, 0.95);
+            margin: 5% auto;
+            padding: 40px;
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            animation: modalFadeIn 0.5s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: var(--light);
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--accent);
+        }
+        
+        .payment-options {
+            margin-top: 30px;
+        }
+        
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-option:hover {
+            background: rgba(248, 195, 0, 0.2);
+        }
+        
+        .payment-option img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            margin-right: 15px;
+            background: white;
+            border-radius: 50%;
+            padding: 5px;
+        }
+        
+        .payment-option span {
+            font-weight: 700;
+        }
+        
+        .payment-option.active {
+            background: rgba(248, 195, 0, 0.3);
+            border: 1px solid var(--accent);
+        }
+        
+        .payment-details {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .payment-details.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .wallet-address {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            word-break: break-all;
+            font-family: monospace;
+            position: relative;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        
+        .telegram-contact {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 136, 204, 0.1);
+            border-radius: 5px;
+            border-left: 3px solid #0088cc;
+        }
+        
+        /* Responsiveness */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 56px;
+            }
+            
+            .stat-item {
+                width: 45%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px 10px;
+            }
+            
+            .hero h1 {
+                font-size: 42px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .btn {
+                padding: 12px 30px;
+                font-size: 14px;
+            }
+            
+            .stat-item {
+                width: 100%;
+            }
+            
+            .pricing-card {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            
+            .btn-secondary {
+                margin-left: 0;
+            }
+            
+            .section-title h2 {
+                font-size: 32px;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>📊 Generador de Señales de Trading</h1>
-            <p>Simulador de señales para Forex, Cripto y Binarias</p>
-        </header>
-
-        <div class="panel">
-            <h2>⚙️ Configuración</h2>
-            <div class="controls">
-                <select id="asset">
-                    <option value="BTC">Bitcoin (BTC/USD)</option>
-                    <option value="EURUSD">EUR/USD</option>
-                    <option value="AAPL">Apple (AAPL)</option>
-                    <option value="GOLD">Oro (XAU/USD)</option>
-                </select>
-                <select id="timeframe">
-                    <option value="1m">1 Minuto</option>
-                    <option value="5m">5 Minutos</option>
-                    <option value="15m">15 Minutos</option>
-                    <option value="1h">1 Hora</option>
-                    <option value="4h">4 Horas</option>
-                </select>
-                <button id="generate">Generar Señal</button>
-                <button id="clear">Limpiar Historial</button>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Foot<span>Pro</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Accurate <span>predictions</span> for English football matches</h1>
+            <p>Our team of experts analyzes statistics, team form, player injuries and other factors to provide you with the most accurate predictions for Premier League, Championship and other English tournaments.</p>
+            <div>
+                <a href="#pricing" class="btn pulse">Choose Plan</a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
             </div>
         </div>
-
-        <div class="panel">
-            <h2>📈 Gráfico de Precios</h2>
-            <div id="chart-container">
-                <canvas id="priceChart"></canvas>
+    </section>
+    
+    <section id="about" style="background: rgba(0, 0, 0, 0.8);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Stats</h2>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">87%</div>
+                    <div class="stat-text">Prediction accuracy last month</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-text">Customer support</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-text">Years in predictions</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10k+</div>
+                    <div class="stat-text">Satisfied clients</div>
+                </div>
+            </div>
+            <div class="section-title">
+                <h2>How It Works</h2>
+            </div>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; line-height: 1.6; font-size: 18px;">
+                Our experts analyze dozens of factors daily that affect match outcomes: team statistics, recent results, injuries and suspensions, motivation, match schedule and even weather conditions. We don't just guess results - we provide professional data-driven analysis.
+            </p>
+        </div>
+    </section>
+    
+    <section id="pricing" style="background: rgba(10, 10, 10, 0.9);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Plans</h2>
+            </div>
+            <div class="pricing">
+                <div class="pricing-card">
+                    <h3>Standard</h3>
+                    <div class="price">$49 <span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>3-5 predictions per week</li>
+                        <li>Major Premier League matches</li>
+                        <li>Odds from 1.5</li>
+                        <li>Team statistics</li>
+                        <li>Email notifications</li>
+                    </ul>
+                    <button class="btn select-plan" data-plan="standard">Select</button>
+                </div>
+                <div class="pricing-card popular">
+                    <h3>VIP</h3>
+                    <div class="price">$99 <span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>5-7 predictions per week</li>
+                        <li>All Premier League matches</li>
+                        <li>Odds from 1.8</li>
+                        <li>Detailed match analysis</li>
+                        <li>Telegram notifications</li>
+                        <li>Personal manager</li>
+                    </ul>
+                    <button class="btn select-plan" data-plan="vip">Select</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Premium</h3>
+                    <div class="price">$199 <span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>7-10 predictions per week</li>
+                        <li>All Premier League & Championship matches</li>
+                        <li>Odds from 2.0</li>
+                        <li>Exclusive analysis</li>
+                        <li>Instant notifications</li>
+                        <li>24/7 personal manager</li>
+                        <li>Access to private chat</li>
+                    </ul>
+                    <button class="btn select-plan" data-plan="premium">Select</button>
+                </div>
             </div>
         </div>
-
-        <div class="panel">
-            <h2>📢 Última Señal</h2>
-            <div id="currentSignal" class="signal">Esperando señal...</div>
-            <h2>📜 Historial de Señales</h2>
-            <div id="history"></div>
+    </section>
+    
+    <section id="testimonials" style="background: rgba(0, 0, 0, 0.8);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Client Testimonials</h2>
+            </div>
+            <div class="testimonials">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">In 3 months with the VIP plan, my bankroll grew by 240%. The predictions are really accurate, especially for totals. I recommend it to anyone serious about betting.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Andrew K.">
+                        </div>
+                        <div class="author-info">
+                            <h4>Andrew K.</h4>
+                            <p>VIP client, 8 months</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">I've been using the Standard plan for half a year. During this time I was able to get into profit, although before that I was constantly losing money. I'm especially pleased with the underdog predictions - several times they hit with high odds.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="David S.">
+                        </div>
+                        <div class="author-info">
+                            <h4>David S.</h4>
+                            <p>Standard client, 6 months</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">The Premium plan is worth every penny. In the first month I made 5x the subscription cost! The match analysis is so detailed that I started to understand football better. Special thanks for quick responses to questions.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Helen P.">
+                        </div>
+                        <div class="author-info">
+                            <h4>Helen P.</h4>
+                            <p>Premium client, 4 months</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="faq" style="background: rgba(10, 10, 10, 0.9);">
+        <div class="container">
+            <div class="section-title">
+                <h2>FAQ</h2>
+            </div>
+            <div class="faq">
+                <div class="faq-item">
+                    <div class="faq-question">How often do you provide predictions?</div>
+                    <div class="faq-answer">
+                        <p>The number of predictions depends on the chosen plan. Standard - 3-5 predictions per week, VIP - 5-7 predictions, Premium - 7-10 predictions. We don't just provide many predictions, but carefully select the most promising matches.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What's your prediction success rate?</div>
+                    <div class="faq-answer">
+                        <p>Our average success rate over the last 12 months is 78-85% depending on the plan. Premium predictions show the highest success rate - 83-87%. However, it's important to remember that there are no 100% guarantees in betting.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What types of bets do you recommend?</div>
+                    <div class="faq-answer">
+                        <p>We specialize in several bet types: win/draw (1X2), totals (Over/Under), Asian handicaps, both teams to score. For each match we indicate the most promising betting option in our opinion.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How does payment work?</div>
+                    <div class="faq-answer">
+                        <p>We accept payments in cryptocurrencies: USDT (TRC20 and ERC20), Bitcoin, and through Polygon. After selecting a plan you'll be redirected to the payment page with instructions.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How quickly will I get access after payment?</div>
+                    <div class="faq-answer">
+                        <p>Access is activated within 1-12 hours after payment confirmation on the blockchain. For USDT (TRC20) it's usually 5-15 minutes, for ERC20 - up to 1 hour, for Bitcoin - up to 12 hours depending on network load.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="https://t.me/yourtelegram" class="btn btn-telegram">
+                    <i class="fab fa-telegram"></i> Contact us on Telegram
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-logo">Foot<span>Pro</span></div>
+            <div class="footer-links">
+                <a href="#about">About</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#faq">FAQ</a>
+                <a href="#" class="terms-link">Terms</a>
+                <a href="#" class="privacy-link">Privacy</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="copyright">
+                &copy; 2023 FootPro. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 20px; font-family: 'Oswald', sans-serif; color: var(--accent);">Payment for <span id="selectedPlanName"></span> Plan</h2>
+            <p style="text-align: center; margin-bottom: 30px;">You've selected the <strong id="planName"></strong> plan. Please choose payment method:</p>
+            
+            <div class="payment-options">
+                <div class="payment-option active" data-method="usdt-trc20">
+                    <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT TRC20">
+                    <span>USDT (TRC20)</span>
+                </div>
+                <div class="payment-option" data-method="usdt-erc20">
+                    <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT ERC20">
+                    <span>USDT (ERC20)</span>
+                </div>
+                <div class="payment-option" data-method="bitcoin">
+                    <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="Bitcoin">
+                    <span>Bitcoin</span>
+                </div>
+                <div class="payment-option" data-method="polygon">
+                    <img src="https://cryptologos.cc/logos/polygon-matic-logo.png" alt="Polygon">
+                    <span>Polygon (MATIC)</span>
+                </div>
+            </div>
+            
+            <div class="payment-details active" id="usdt-trc20-details">
+                <h3 style="margin-bottom: 15px; color: var(--accent);">USDT (TRC20) Payment Instructions</h3>
+                <p>Send <strong id="trc20-amount"></strong> USDT to the following address:</p>
+                <div class="wallet-address">
+                    TJKdN6X1KXyem5bsoVq1zVr7LjLZAbZ1X2
+                    <button class="copy-btn">Copy</button>
+                </div>
+                <p style="margin-top: 15px; font-size: 14px; color: rgba(255,255,255,0.7);">After transaction confirmation on the TRON network your account will be activated within 15-60 minutes.</p>
+                
+                <div class="telegram-contact">
+                    <p>After payment, please contact us on Telegram: <a href="https://t.me/yourtelegram" class="telegram-link">@yourtelegram</a> with your transaction ID to speed up the activation process.</p>
+                </div>
+            </div>
+            
+            <div class="payment-details" id="usdt-erc20-details">
+                <h3 style="margin-bottom: 15px; color: var(--accent);">USDT (ERC20) Payment Instructions</h3>
+                <p>Send <strong id="erc20-amount"></strong> USDT to the following address:</p>
+                <div class="wallet-address">
+                    0x89a4f2F3B3dE7175d2A8D935a5aF0B28D8B3bD1e
+                    <button class="copy-btn">Copy</button>
+                </div>
+                <p style="margin-top: 15px; font-size: 14px; color: rgba(255,255,255,0.7);">Make sure you're sending USDT on the Ethereum network. After 1 confirmation your account will be activated (usually within 1 hour).</p>
+                
+                <div class="telegram-contact">
+                    <p>After payment, please contact us on Telegram: <a href="https://t.me/yourtelegram" class="telegram-link">@yourtelegram</a> with your transaction ID to speed up the activation process.</p>
+                </div>
+            </div>
+            
+            <div class="payment-details" id="bitcoin-details">
+                <h3 style="margin-bottom: 15px; color: var(--accent);">Bitcoin Payment Instructions</h3>
+                <p>Send <strong id="btc-amount"></strong> BTC to the following address:</p>
+                <div class="wallet-address">
+                    3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5
+                    <button class="copy-btn">Copy</button>
+                </div>
+                <p style="margin-top: 15px; font-size: 14px; color: rgba(255,255,255,0.7);">Due to BTC volatility the amount may vary slightly. Account will be activated after 1 network confirmation (usually up to 12 hours).</p>
+                
+                <div class="telegram-contact">
+                    <p>After payment, please contact us on Telegram: <a href="https://t.me/yourtelegram" class="telegram-link">@yourtelegram</a> with your transaction ID to speed up the activation process.</p>
+                </div>
+            </div>
+            
+            <div class="payment-details" id="polygon-details">
+                <h3 style="margin-bottom: 15px; color: var(--accent);">Polygon (MATIC) Payment Instructions</h3>
+                <p>Send <strong id="matic-amount"></strong> MATIC to the following address:</p>
+                <div class="wallet-address">
+                    0x89a4f2F3B3dE7175d2A8D935a5aF0B28D8B3bD1e
+                    <button class="copy-btn">Copy</button>
+                </div>
+                <p style="margin-top: 15px; font-size: 14px; color: rgba(255,255,255,0.7);">Make sure you're sending MATIC on the Polygon network. Account will be activated within 30 minutes after confirmation.</p>
+                
+                <div class="telegram-contact">
+                    <p>After payment, please contact us on Telegram: <a href="https://t.me/yourtelegram" class="telegram-link">@yourtelegram</a> with your transaction ID to speed up the activation process.</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; padding: 20px; background: rgba(248, 195, 0, 0.1); border-radius: 5px;">
+                <h4 style="color: var(--accent); margin-bottom: 10px;">Important!</h4>
+                <p style="font-size: 14px;">After payment send the transaction confirmation screenshot to our manager on Telegram to speed up activation. Your ID: <strong id="userId"></strong></p>
+            </div>
         </div>
     </div>
-
+    
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script>
-        // Datos iniciales para el gráfico
-        const initialData = {
-            labels: Array.from({ length: 20 }, (_, i) => i + 1),
-            datasets: [{
-                label: 'Precio',
-                data: Array.from({ length: 20 }, () => Math.random() * 100 + 100),
-                borderColor: '#1e3a8a',
-                tension: 0.1,
-                fill: false
-            }]
-        };
-
-        // Configuración del gráfico
-        const ctx = document.getElementById('priceChart').getContext('2d');
-        const priceChart = new Chart(ctx, {
-            type: 'line',
-            data: initialData,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { display: true },
-                    tooltip: { mode: 'index' }
-                },
-                scales: {
-                    y: { beginAtZero: false }
+        // Generate random user ID
+        function generateUserId() {
+            return 'FP' + Math.floor(100000 + Math.random() * 900000);
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set user ID
+            const userId = generateUserId();
+            document.getElementById('userId').textContent = userId;
+            
+            // Handle FAQ
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    question.classList.toggle('active');
+                    answer.classList.toggle('show');
+                });
+            });
+            
+            // Handle plan selection
+            const planButtons = document.querySelectorAll('.select-plan');
+            const modal = document.getElementById('paymentModal');
+            const closeModal = document.querySelector('.close-modal');
+            
+            planButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const plan = button.getAttribute('data-plan');
+                    let planName, price;
+                    
+                    switch(plan) {
+                        case 'standard':
+                            planName = 'Standard';
+                            price = 49;
+                            break;
+                        case 'vip':
+                            planName = 'VIP';
+                            price = 99;
+                            break;
+                        case 'premium':
+                            planName = 'Premium';
+                            price = 199;
+                            break;
+                    }
+                    
+                    document.getElementById('selectedPlanName').textContent = planName;
+                    document.getElementById('planName').textContent = planName;
+                    document.getElementById('trc20-amount').textContent = price;
+                    document.getElementById('erc20-amount').textContent = price;
+                    document.getElementById('btc-amount').textContent = (price / 30000).toFixed(6); // Approximate rate
+                    document.getElementById('matic-amount').textContent = (price / 0.8).toFixed(2); // Approximate rate
+                    
+                    modal.style.display = 'block';
+                });
+            });
+            
+            closeModal.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
                 }
-            }
-        });
-
-        // Generar señal aleatoria
-        function generateSignal() {
-            const assets = {
-                "BTC": "Bitcoin",
-                "EURUSD": "EUR/USD",
-                "AAPL": "Apple",
-                "GOLD": "Oro"
-            };
-            const asset = document.getElementById('asset').value;
-            const timeframe = document.getElementById('timeframe').value;
+            });
             
-            // Señal aleatoria (COMPRA/VENTA)
-            const signalType = Math.random() > 0.5 ? "COMPRA" : "VENTA";
-            const rsi = (Math.random() * 30 + 30).toFixed(2);
-            const macd = (Math.random() * 2 - 1).toFixed(2);
-            const price = (Math.random() * 10000 + 10000).toFixed(2);
+            // Handle payment method selection
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            const paymentDetails = document.querySelectorAll('.payment-details');
             
-            // Actualizar última señal
-            const currentSignal = document.getElementById('currentSignal');
-            currentSignal.textContent = `${signalType} ${assets[asset]} (${timeframe}) | Precio: ${price}`;
-            currentSignal.className = `signal ${signalType === 'COMPRA' ? 'buy' : 'sell'}`;
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    paymentOptions.forEach(opt => opt.classList.remove('active'));
+                    option.classList.add('active');
+                    
+                    const method = option.getAttribute('data-method');
+                    paymentDetails.forEach(detail => detail.classList.remove('active'));
+                    document.getElementById(`${method}-details`).classList.add('active');
+                });
+            });
             
-            // Añadir al historial
-            const history = document.getElementById('history');
-            const signalElement = document.createElement('div');
-            signalElement.className = `signal ${signalType === 'COMPRA' ? 'buy' : 'sell'}`;
-            signalElement.textContent = `[${new Date().toLocaleTimeString()}] ${signalType} ${assets[asset]} (${timeframe}) | RSI: ${rsi} | MACD: ${macd} | Precio: ${price}`;
-            history.prepend(signalElement);
+            // Copy addresses
+            const copyButtons = document.querySelectorAll('.copy-btn');
+            copyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const address = button.parentElement.textContent.trim();
+                    navigator.clipboard.writeText(address).then(() => {
+                        button.textContent = 'Copied!';
+                        setTimeout(() => {
+                            button.textContent = 'Copy';
+                        }, 2000);
+                    });
+                });
+            });
             
-            // Actualizar gráfico con nueva data
-            updateChart();
-        }
-
-        // Actualizar el gráfico con datos aleatorios
-        function updateChart() {
-            const newData = Array.from({ length: 20 }, () => Math.random() * 100 + 100);
-            priceChart.data.datasets[0].data = newData;
-            priceChart.update();
-        }
-
-        // Event Listeners
-        document.getElementById('generate').addEventListener('click', generateSignal);
-        document.getElementById('clear').addEventListener('click', () => {
-            document.getElementById('history').innerHTML = '';
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
         });
     </script>
 </body>
